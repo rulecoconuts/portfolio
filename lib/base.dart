@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/about.dart';
 import 'package:portfolio/data/contact.dart';
 import 'package:portfolio/data/education.dart';
 import 'package:portfolio/data/experience.dart';
@@ -14,11 +15,11 @@ class BasePage extends StatefulWidget {
 
 class _BagePageState extends State<BasePage> {
   Map<String, Widget> pages = {
-    "Home": Container(),
-    "About": Container(),
-    "Projects": Container()
+    "Home": Container(color: Colors.purple,),
+    "About": AboutPage(),
+    "Projects": Container(color: Colors.amber,)
   };
-  String selectedPage = "Home";
+  String selectedPage = "About";
 
   Widget _wrapText(Text text) {
     return FittedBox(fit: BoxFit.cover, child: text);
@@ -45,7 +46,11 @@ class _BagePageState extends State<BasePage> {
     ]);
   }
 
-  void _onPageNavClicked(String title) {}
+  void _onPageNavClicked(String title) {
+    setState(() {
+      selectedPage = title;
+    });
+  }
 
   Widget _generateSelectedPageNavText(String title) {
     return ElevatedButton(
@@ -113,11 +118,30 @@ class _BagePageState extends State<BasePage> {
     return Container();
   }
 
+  Widget get _placeholderPage {
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.black, Colors.blue],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight)),
+    );
+  }
+
+  Widget get _currentPage {
+    return Column(children: [
+      Expanded(
+          child: FractionallySizedBox(
+              widthFactor: 0.7, heightFactor: 0.7, child: pages[selectedPage])),
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: [Colors.blue, Colors.black],
               begin: Alignment.topRight,
@@ -127,12 +151,12 @@ class _BagePageState extends State<BasePage> {
           children: [
             Expanded(child: _topBar(context), flex: 1),
             Expanded(
-              child: Container(),
+              child: _currentPage,
               flex: 14,
             )
           ],
         ),
       ),
-    );
+    ));
   }
 }
