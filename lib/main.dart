@@ -26,6 +26,8 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        primaryColor: Colors.amber,
+        secondaryHeaderColor: Colors.white,
         textTheme: GoogleFonts.syneTextTheme(Theme.of(context).textTheme)
       ),
       home: BasePage(Contact("Oghenefejiro", "Abohweyere", "afejith@yahoo.com", "289-943-0202", middleName: "Theodore")),

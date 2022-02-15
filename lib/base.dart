@@ -4,6 +4,7 @@ import 'package:portfolio/about.dart';
 import 'package:portfolio/data/contact.dart';
 import 'package:portfolio/data/education.dart';
 import 'package:portfolio/data/experience.dart';
+import 'package:portfolio/skills.dart';
 
 class BasePage extends StatefulWidget {
   final Contact _contact;
@@ -16,10 +17,17 @@ class BasePage extends StatefulWidget {
 class _BagePageState extends State<BasePage> {
   Map<String, Widget> pages = {
     "Home": Container(color: Colors.purple,),
-    "About": AboutPage(),
     "Projects": Container(color: Colors.amber,)
   };
-  String selectedPage = "About";
+  String selectedPage = "Skills";
+
+  @override
+  void initState(){
+    super.initState();
+    pages["Home"] = _placeholderPage;
+    pages["About"] = AboutPage("assets/about.txt", _placeholderPage);
+    pages["Skills"] = SkillsWidget("assets/skills.json", 3);
+  }
 
   Widget _wrapText(Text text) {
     return FittedBox(fit: BoxFit.cover, child: text);
@@ -61,7 +69,7 @@ class _BagePageState extends State<BasePage> {
             style: Theme.of(context)
                 .textTheme
                 .subtitle1
-                ?.merge(TextStyle(color: Colors.black))),
+                ?.merge(TextStyle(color: Colors.black, fontWeight: FontWeight.bold))),
       ),
       style:
           ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
