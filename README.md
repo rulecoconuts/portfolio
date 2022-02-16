@@ -1,6 +1,6 @@
 # portfolio
 
-A new Flutter project.
+Oghenefejiro's software developer portfolio
 
 ## Getting Started
 
