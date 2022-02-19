@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/about.dart';
+import 'package:portfolio/banner.dart';
 import 'package:portfolio/data/contact.dart';
 import 'package:portfolio/data/education.dart';
 import 'package:portfolio/data/experience.dart';
@@ -17,16 +18,16 @@ class BasePage extends StatefulWidget {
 class _BagePageState extends State<BasePage> {
   Map<String, Widget> pages = {
     "Home": Container(color: Colors.purple,),
-    "Projects": Container(color: Colors.amber,)
   };
-  String selectedPage = "Skills";
+  String selectedPage = "Home";
 
   @override
   void initState(){
     super.initState();
-    pages["Home"] = _placeholderPage;
-    pages["About"] = AboutPage("assets/about.txt", _placeholderPage);
+    pages["Home"] = BannerPage("assets/banner.txt", placeholderWidget: _placeholderPage,);
     pages["Skills"] = SkillsWidget("assets/skills.json", 3);
+    pages["Projects"] = _placeholderPage;
+    pages["About"] = AboutPage("assets/about.txt", _placeholderPage);
   }
 
   Widget _wrapText(Text text) {
@@ -168,3 +169,4 @@ class _BagePageState extends State<BasePage> {
     ));
   }
 }
+
